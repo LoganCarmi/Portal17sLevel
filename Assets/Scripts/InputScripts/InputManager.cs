@@ -8,21 +8,25 @@ public class InputManager : MonoBehaviour
 {
     [SerializeField] Movement movement;
     [SerializeField] MouseLook mouseLook;
+    [SerializeField] GunScript gunScript;
 
     PlayerControls controls;
-    PlayerControls.PlayerActions playerMovement;
+    PlayerControls.PlayerActions playerControls;
 
     Vector2 horizontalInput;
     Vector2 mouseInput;
 
     private void Awake() {
         controls = new PlayerControls();
-        playerMovement = controls.Player;
-        playerMovement.Move.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();
-        playerMovement.Jump.performed += _ => movement.OnJumpPressed();
+        playerControls = controls.Player;
+        playerControls.Move.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();
+        playerControls.Jump.performed += _ => movement.OnJumpPressed();
 
-        playerMovement.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();    
-        playerMovement.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
+        playerControls.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();    
+        playerControls.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
+
+        playerControls.ShootLeft.performed += _ => gunScript.Shoot("Left");
+        playerControls.ShootRight.performed += _ => gunScript.Shoot("Right");
     }
 
     private void OnEnable() {

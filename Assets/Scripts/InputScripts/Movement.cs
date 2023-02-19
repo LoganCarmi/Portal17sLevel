@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour
         horizontalInput = _horizontalInput;
     }
 
-   public void OnJumpPressed () {
+    public void OnJumpPressed () {
         isJumping = true;
-   }
+    }
 }

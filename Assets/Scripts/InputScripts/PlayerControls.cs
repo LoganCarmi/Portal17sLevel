@@ -46,7 +46,16 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Shoot"",
+                    ""name"": ""ShootRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""43d85f37-bef7-4490-8130-9d17f260023a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShootLeft"",
                     ""type"": ""Button"",
                     ""id"": ""127f8db4-43ea-46f6-afad-bb345370a2a9"",
                     ""expectedControlType"": ""Button"",
@@ -90,18 +99,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Shoot"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3644f94e-d48e-4920-88ff-d6bf34434e64"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Shoot"",
+                    ""action"": ""ShootLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -214,6 +212,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""MouseY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aa338a26-c888-47f7-bb30-f63a97fc260f"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShootRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -224,7 +233,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+        m_Player_ShootRight = m_Player.FindAction("ShootRight", throwIfNotFound: true);
+        m_Player_ShootLeft = m_Player.FindAction("ShootLeft", throwIfNotFound: true);
         m_Player_Options = m_Player.FindAction("Options", throwIfNotFound: true);
         m_Player_MouseX = m_Player.FindAction("MouseX", throwIfNotFound: true);
         m_Player_MouseY = m_Player.FindAction("MouseY", throwIfNotFound: true);
@@ -289,7 +299,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Shoot;
+    private readonly InputAction m_Player_ShootRight;
+    private readonly InputAction m_Player_ShootLeft;
     private readonly InputAction m_Player_Options;
     private readonly InputAction m_Player_MouseX;
     private readonly InputAction m_Player_MouseY;
@@ -299,7 +310,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+        public InputAction @ShootRight => m_Wrapper.m_Player_ShootRight;
+        public InputAction @ShootLeft => m_Wrapper.m_Player_ShootLeft;
         public InputAction @Options => m_Wrapper.m_Player_Options;
         public InputAction @MouseX => m_Wrapper.m_Player_MouseX;
         public InputAction @MouseY => m_Wrapper.m_Player_MouseY;
@@ -318,9 +330,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
-                @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
-                @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                @ShootRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootRight;
+                @ShootRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootRight;
+                @ShootRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootRight;
+                @ShootLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootLeft;
+                @ShootLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootLeft;
+                @ShootLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootLeft;
                 @Options.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOptions;
                 @Options.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOptions;
                 @Options.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOptions;
@@ -340,9 +355,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @Shoot.started += instance.OnShoot;
-                @Shoot.performed += instance.OnShoot;
-                @Shoot.canceled += instance.OnShoot;
+                @ShootRight.started += instance.OnShootRight;
+                @ShootRight.performed += instance.OnShootRight;
+                @ShootRight.canceled += instance.OnShootRight;
+                @ShootLeft.started += instance.OnShootLeft;
+                @ShootLeft.performed += instance.OnShootLeft;
+                @ShootLeft.canceled += instance.OnShootLeft;
                 @Options.started += instance.OnOptions;
                 @Options.performed += instance.OnOptions;
                 @Options.canceled += instance.OnOptions;
@@ -360,7 +378,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnShoot(InputAction.CallbackContext context);
+        void OnShootRight(InputAction.CallbackContext context);
+        void OnShootLeft(InputAction.CallbackContext context);
         void OnOptions(InputAction.CallbackContext context);
         void OnMouseX(InputAction.CallbackContext context);
         void OnMouseY(InputAction.CallbackContext context);
