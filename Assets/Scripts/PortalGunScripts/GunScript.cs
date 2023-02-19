@@ -9,7 +9,9 @@ public class GunScript : MonoBehaviour
     [SerializeField] GameObject BlueBall;
 
     public void Shoot (string side) {
-        if (side == "Right") Instantiate(BlueBall, BallSpawnPoint.transform.position, BallSpawnPoint.transform.rotation);
+
+        if (side == "Right") Instantiate(BlueBall, BallSpawnPoint.transform.position, BallSpawnPoint.transform.rotation); 
         else Instantiate(OrangeBall, BallSpawnPoint.transform.position, BallSpawnPoint.transform.rotation);
+        
     }
 }

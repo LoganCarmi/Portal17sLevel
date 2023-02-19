@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2736006989093085801}
   - component: {fileID: 2916170139956558192}
   - component: {fileID: 9114479438004807859}
+  - component: {fileID: -1081285604286213555}
   m_Layer: 0
   m_Name: BlueBall
   m_TagString: Untagged
@@ -114,3 +115,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Force: 50
+  Portal: {fileID: 8175082545192065649, guid: 5ece2b597760e84469a9a7821892b048, type: 3}
+--- !u!135 &-1081285604286213555
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2736006989093085800}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.49999997
+  m_Center: {x: 0, y: 0, z: 0}
