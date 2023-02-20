@@ -25,6 +25,11 @@ public class Portal : MonoBehaviour
             // Téléporter le joueur
             other.gameObject.transform.position = new_position;
             other.GetComponent<CharacterController>().enabled = true;
+        } else if (other.CompareTag("MovableItem") && GameObject.FindWithTag(OtherPortalTag) != null) {
+            
+            Vector3 new_position = GameObject.FindWithTag(OtherPortalTag).transform.position + 2 * GameObject.FindWithTag(OtherPortalTag).transform.right;
+            other.gameObject.transform.position = new_position;
+        
         }
     }
 
