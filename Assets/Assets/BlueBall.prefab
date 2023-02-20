@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b316e302921753c43b7f4f562568cae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPos: {fileID: 1260392823075632907, guid: c6efd7a769e88904e9484b14a3a073c4, type: 3}
   Force: 50
   Portal: {fileID: 8175082545192065649, guid: 5ece2b597760e84469a9a7821892b048, type: 3}
 --- !u!135 &-1081285604286213555
