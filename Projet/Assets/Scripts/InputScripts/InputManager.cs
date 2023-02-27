@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
+// Script qui gère la manière à laquelle les inputs sont gérés
 public class InputManager : MonoBehaviour
 {
+    // Déclaration des variables
     [SerializeField] Movement movement;
     [SerializeField] MouseLook mouseLook;
     [SerializeField] GunScript gunScript;
@@ -16,9 +18,14 @@ public class InputManager : MonoBehaviour
     Vector2 horizontalInput;
     Vector2 mouseInput;
 
+    // Définition des fonctions et association à quelle fonction correspond quel input
     private void Awake() {
+        
+        // Récupération de mon controlleur d'input
         controls = new PlayerControls();
         playerControls = controls.Player;
+
+        // Association des inputs du controlleurs à leurs fonctions en récupérant les valeurs des inputs si nécessaire
         playerControls.Move.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();
         playerControls.Jump.performed += _ => movement.OnJumpPressed();
 
@@ -37,6 +44,7 @@ public class InputManager : MonoBehaviour
         controls.Disable();
     }
     
+    // Récupère de manière continue les déplacements du joueur et de sa caméra
     private void Update() {
         movement.ReceiveInput(horizontalInput);
         mouseLook.ReceiveInput(mouseInput);
